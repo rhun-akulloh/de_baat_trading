@@ -32,8 +32,23 @@ export function getStore(): Store {
 const byNewest = (a: Product, b: Product) =>
   Number(!!b.featured) - Number(!!a.featured) || (parseInt(b.article, 10) || 0) - (parseInt(a.article, 10) || 0);
 
-/** Deduplicated per request, so a page can call these freely. */
-export const listAll = cache(async () => [...(await getStore().listAll())].sort(byNewest));
+/**
+ * Deduplicated per request, so a page can call these freely.
+ *
+ * While *building*, a database that can't be reached (wrong URL, paused, first deploy) must not fail the
+ * whole deploy — pages are pre-rendered from the bundled starter catalog instead and refresh from the real
+ * database within a minute (ISR). At runtime errors are NOT swallowed, so a broken database is never hidden.
+ */
+export const listAll = cache(async () => {
+  try {
+    return [...(await getStore().listAll())].sort(byNewest);
+  } catch (e) {
+    if (process.env.NEXT_PHASE !== "phase-production-build") throw e;
+    const cause = e instanceof Error && e.cause instanceof Error ? ` (${e.cause.message})` : "";
+    console.warn(`[store] database unreachable during build, pre-rendering with the starter catalog: ${e instanceof Error ? e.message.slice(0, 160) : e}${cause}`);
+    return [...seedProducts].sort(byNewest);
+  }
+});
 
 /** What visitors see: for sale or sold, never hidden. */
 export const listPublic = cache(async () => (await listAll()).filter((p) => p.status !== "hidden"));
