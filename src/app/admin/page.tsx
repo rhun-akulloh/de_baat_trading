@@ -19,7 +19,16 @@ export default async function AdminHome() {
   await requireAdmin();
   const { t } = await getAdminDict();
   const store = getStore();
-  const products = await listAll();
+  // A broken database must not turn the whole admin into a blank "server error" — say what's wrong instead.
+  // (Only a logged-in admin sees this, and the message never contains the connection string.)
+  let products: Awaited<ReturnType<typeof listAll>> = [];
+  let dbError = "";
+  try {
+    products = await listAll();
+  } catch (e) {
+    console.error("[admin] could not load products", e);
+    dbError = (e instanceof Error ? e.message : String(e)).replace(/postgres(ql)?:\/\/\S+/gi, "[connection string]").slice(0, 240);
+  }
   const photosReady = imageStorageReady();
 
   return (
@@ -29,7 +38,7 @@ export default async function AdminHome() {
           <ForkliftMark className="size-11" />
           <div>
             <h1 className="text-2xl font-extrabold">{t.list.title}</h1>
-            <p className="text-sm text-muted">{fmt(t.list.total, { n: products.length })}</p>
+            <p className="text-sm text-muted">{dbError ? "" : fmt(t.list.total, { n: products.length })}</p>
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -42,7 +51,7 @@ export default async function AdminHome() {
               <LogOut className="size-4" /> {t.common.logout}
             </button>
           </form>
-          {store.writable && (
+          {store.writable && !dbError && (
             <Link href="/admin/products/new" className="bg-accent-gradient inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-[#1a0d00] shadow-md">
               <Plus className="size-4" /> {t.list.newProduct}
             </Link>
@@ -50,6 +59,11 @@ export default async function AdminHome() {
         </div>
       </header>
 
+      {dbError && (
+        <p role="alert" className="mb-6 rounded-2xl border border-red-500/40 bg-red-500/10 px-5 py-4 text-sm font-medium">
+          <b>{t.list.dbErrorTitle}</b> {t.list.dbErrorHelp} <code className="break-words">{dbError}</code>
+        </p>
+      )}
       {!store.writable && (
         <p role="alert" className="mb-6 rounded-2xl border border-accent/40 bg-accent/10 px-5 py-4 text-sm font-medium">
           <b>{t.list.noDbTitle}</b> {t.list.noDbText}

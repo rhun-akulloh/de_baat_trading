@@ -30,6 +30,9 @@ const nl = {
     newProduct: "Nieuw product",
     noDbTitle: "Er is nog geen database gekoppeld.",
     noDbText: "Je kunt de producten bekijken, maar nog niets wijzigen. Voeg DATABASE_URL toe aan de omgevingsvariabelen (zie README).",
+    dbErrorTitle: "De database kan niet worden bereikt.",
+    dbErrorHelp:
+      "Controleer DATABASE_URL in de omgevingsvariabelen: geen aanhalingstekens of spaties, het juiste (nieuwste) wachtwoord en het juiste Neon-project. Herstart/redeploy daarna. Technische melding:",
     noPhotosTitle: "Foto's uploaden is nog niet ingesteld.",
     noPhotosText: "Voeg BLOB_READ_WRITE_TOKEN toe aan de omgevingsvariabelen om nieuwe foto's te kunnen toevoegen.",
     search: "Zoek op titel, merk of artikelnummer…",
@@ -168,6 +171,9 @@ const en: AdminDict = {
     newProduct: "New product",
     noDbTitle: "No database is connected yet.",
     noDbText: "You can view the products but can't change anything yet. Add DATABASE_URL to the environment variables (see README).",
+    dbErrorTitle: "The database can't be reached.",
+    dbErrorHelp:
+      "Check DATABASE_URL in the environment variables: no quotes or spaces, the correct (newest) password and the right Neon project. Then redeploy. Technical message:",
     noPhotosTitle: "Photo uploads aren't set up yet.",
     noPhotosText: "Add BLOB_READ_WRITE_TOKEN to the environment variables to be able to add new photos.",
     search: "Search by title, brand or article number…",

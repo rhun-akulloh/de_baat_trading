@@ -3,14 +3,15 @@ import crypto from "node:crypto";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { env } from "./env";
 
 const COOKIE = "admin_session";
 const MAX_AGE = 60 * 60 * 24 * 7; // 7 days
 
 export const authConfigured = () =>
-  !!process.env.ADMIN_EMAIL && !!process.env.ADMIN_PASSWORD_HASH && (process.env.AUTH_SECRET?.length ?? 0) >= 32;
+  !!env("ADMIN_EMAIL") && !!env("ADMIN_PASSWORD_HASH") && (env("AUTH_SECRET")?.length ?? 0) >= 32;
 
-const secretKey = () => new TextEncoder().encode(process.env.AUTH_SECRET);
+const secretKey = () => new TextEncoder().encode(env("AUTH_SECRET"));
 
 const digest = (s: string) => crypto.createHash("sha256").update(s).digest();
 
@@ -29,8 +30,8 @@ export function verifyPassword(password: string, stored: string) {
 /** Always does the full work, so response time doesn't reveal whether the e-mail was right. */
 export function checkCredentials(email: string, password: string) {
   if (!authConfigured()) return false;
-  const emailOk = crypto.timingSafeEqual(digest(email.trim().toLowerCase()), digest(process.env.ADMIN_EMAIL!.trim().toLowerCase()));
-  const passOk = verifyPassword(password, process.env.ADMIN_PASSWORD_HASH!);
+  const emailOk = crypto.timingSafeEqual(digest(email.trim().toLowerCase()), digest(env("ADMIN_EMAIL")!.toLowerCase()));
+  const passOk = verifyPassword(password, env("ADMIN_PASSWORD_HASH")!);
   return emailOk && passOk;
 }
 

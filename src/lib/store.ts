@@ -6,6 +6,7 @@ import type { Product } from "./products";
 import type { Store } from "./store-types";
 import { createPgStore } from "./store-pg";
 import { createFileStore } from "./store-file";
+import { databaseUrl } from "./env";
 
 const seedProducts = seed as Product[];
 
@@ -19,7 +20,7 @@ let store: Store | undefined;
  */
 export function getStore(): Store {
   if (store) return store;
-  const url = process.env.DATABASE_URL;
+  const url = databaseUrl();
   if (url) {
     const sql = neon(url);
     store = createPgStore((text, params) => sql.query(text, params ?? []) as Promise<Record<string, unknown>[]>, seedProducts);
