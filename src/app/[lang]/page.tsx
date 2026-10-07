@@ -4,12 +4,11 @@ import { notFound } from "next/navigation";
 import { ArrowRight, Clock, PackageCheck, RotateCcw, Truck, Banknote, Wrench, ShieldCheck } from "lucide-react";
 import { getDictionary } from "@/dictionaries";
 import { hasLocale } from "@/lib/i18n";
-import { categoryIds, formatPrice, uniqueBrands } from "@/lib/products";
+import { categoryIds, uniqueBrands } from "@/lib/products";
 import { listPublic } from "@/lib/store";
 import { site } from "@/lib/site";
 import { Reveal } from "@/components/reveal";
 import { Counter } from "@/components/counter";
-import { HeroShowreel } from "@/components/hero-showreel";
 import { FeaturedCarousel } from "@/components/featured-carousel";
 
 // Hand-picked covers where the first photo of a category doesn't show the machine well.
@@ -34,7 +33,6 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
     viewing: 30,
     categories: categoryIds.length,
   };
-  const cheapest = forSale.length ? Math.min(...forSale.map((p) => p.price)) : 0;
 
   return (
     <>
@@ -47,7 +45,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         </div>
         <div className="grid-bg pointer-events-none absolute inset-0" />
 
-        <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-4 pt-14 pb-24 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:pt-20 lg:pb-32">
+        <div className="relative mx-auto max-w-4xl px-4 pt-10 pb-24 text-center sm:px-6 sm:pt-16 sm:pb-28 lg:pt-24 lg:pb-36">
           <div>
             <Reveal y={16}>
               <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold backdrop-blur sm:text-sm">
@@ -56,16 +54,16 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
               </span>
             </Reveal>
             <Reveal delay={0.08}>
-              <h1 className="mt-6 text-[2.4rem] leading-[1.05] font-extrabold sm:text-5xl xl:text-[3.6rem]">
+              <h1 className="mt-6 text-[2.1rem] leading-[1.08] font-extrabold sm:text-5xl lg:text-6xl">
                 {dict.home.title1}
                 <br />
                 <span className="text-gradient">{dict.home.title2}</span>
               </h1>
             </Reveal>
             <Reveal delay={0.16}>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/80">{dict.home.subtitle}</p>
+              <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/80">{dict.home.subtitle}</p>
             </Reveal>
-            <Reveal delay={0.24} className="mt-9 flex flex-wrap gap-3">
+            <Reveal delay={0.24} className="mt-9 flex flex-wrap justify-center gap-3">
               <Link
                 href={`/${lang}/products`}
                 className="bg-accent-gradient group inline-flex items-center gap-2 rounded-full px-7 py-4 font-bold text-[#1a0d00] shadow-[0_10px_30px_-8px] shadow-accent/70 transition hover:-translate-y-0.5"
@@ -81,23 +79,6 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
               </Link>
             </Reveal>
           </div>
-
-          <HeroShowreel
-            tags={[
-              {
-                label: lang === "nl" ? "Direct uit voorraad" : "Ready from stock",
-                price: `${forSale.length} machines`,
-                className: "-left-3 bottom-24 sm:-left-8",
-                delay: 0,
-              },
-              {
-                label: lang === "nl" ? "Vanaf" : "From",
-                price: `${formatPrice(cheapest, lang)} ${dict.common.exclVat}`,
-                className: "-right-2 top-24 sm:-right-6",
-                delay: 0.4,
-              },
-            ]}
-          />
         </div>
 
         <div className="hazard absolute inset-x-0 bottom-0 h-2" />
