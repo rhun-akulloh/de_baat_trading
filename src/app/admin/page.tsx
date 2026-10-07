@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ExternalLink, LogOut, Plus } from "lucide-react";
 import { logout } from "./actions";
-import { requireAdmin } from "@/lib/auth";
+import { getAdminEmail, requireAdmin } from "@/lib/auth";
 import { getAdminDict } from "@/lib/admin-lang";
 import { fmt } from "@/lib/i18n";
 import { getStore, listAll } from "@/lib/store";
@@ -18,6 +18,7 @@ export const dynamic = "force-dynamic";
 export default async function AdminHome() {
   await requireAdmin();
   const { t } = await getAdminDict();
+  const adminEmail = await getAdminEmail();
   const store = getStore();
   // A broken database must not turn the whole admin into a blank "server error" — say what's wrong instead.
   // (Only a logged-in admin sees this, and the message never contains the connection string.)
@@ -39,6 +40,7 @@ export default async function AdminHome() {
           <div>
             <h1 className="text-2xl font-extrabold">{t.list.title}</h1>
             <p className="text-sm text-muted">{dbError ? "" : fmt(t.list.total, { n: products.length })}</p>
+            {adminEmail && <p className="text-xs text-muted">{fmt(t.common.signedInAs, { email: adminEmail })}</p>}
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-2">

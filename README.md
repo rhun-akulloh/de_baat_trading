@@ -45,6 +45,11 @@ Changes show on the public site immediately. English text is optional and falls 
 3. **Login** — run `npm run admin:hash -- "a long password"` and copy the two printed values into
    `ADMIN_PASSWORD_HASH` and `AUTH_SECRET`, plus `ADMIN_EMAIL`.
    Changing `AUTH_SECRET` logs everyone out; changing the hash changes the password.
+   **More than one admin:** run `npm run admin:hash -- "their password" --slot 2` (up to slot 5) and set
+   `ADMIN_EMAIL_2` + `ADMIN_PASSWORD_HASH_2`. Each person logs in with their own e-mail and password, and the
+   dashboard shows who is signed in. Delete a pair of variables and that person is locked out immediately,
+   even if they are still logged in. Tip: copy the hash from a file, not from the terminal, because long
+   lines wrap and a line break inside the value breaks the login.
 4. Redeploy so the new variables take effect.
 
 Self-hosting on one server with a persistent disk? `PRODUCT_STORE=file` stores products in `.data/products.json`

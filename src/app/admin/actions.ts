@@ -28,10 +28,10 @@ export async function login(_prev: { error?: "wrong" | "tooMany"; email?: string
   const ip = clientIp(new Request("http://x", { headers: await headers() }));
   if (rateLimited(`login:${ip}`, 8, 15 * 60_000)) return { error: "tooMany" as const, email };
 
-  const ok = checkCredentials(email, String(formData.get("password") ?? ""));
-  if (!ok) return { error: "wrong" as const, email };
+  const who = checkCredentials(email, String(formData.get("password") ?? ""));
+  if (!who) return { error: "wrong" as const, email };
 
-  await startSession();
+  await startSession(who);
   redirect("/admin");
 }
 
