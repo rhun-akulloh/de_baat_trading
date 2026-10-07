@@ -117,7 +117,7 @@ export default async function ProductPage({ params }: PageProps<"/[lang]/product
             </div>
             <ul className="mt-6 space-y-2.5 border-t border-line pt-5 text-sm">
               <li className="flex gap-3"><Truck className="mt-0.5 size-5 shrink-0 text-accent" /> {fmt(d.product.shippingNote, { price: site.deliveryPrice })}</li>
-              <li className="flex gap-3"><RotateCcw className="mt-0.5 size-5 shrink-0 text-accent" /> {d.home.why[3].title}</li>
+              <li className="flex gap-3"><RotateCcw className="mt-0.5 size-5 shrink-0 text-accent" /> {d.product.viewingPeriod}</li>
               <li className="flex gap-3"><Zap className="mt-0.5 size-5 shrink-0 text-accent" /> {d.common.soldHint}</li>
             </ul>
             <p className="mt-4 text-xs text-muted">{d.product.orderText} {d.product.businessOnly}</p>

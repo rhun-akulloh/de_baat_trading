@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Clock, PackageCheck, RotateCcw, Truck, Banknote, Wrench, ShieldCheck } from "lucide-react";
+import { ArrowRight, PackageCheck, Truck, Banknote, ShieldCheck } from "lucide-react";
 import { getDictionary } from "@/dictionaries";
 import { hasLocale } from "@/lib/i18n";
 import { categoryIds, uniqueBrands } from "@/lib/products";
@@ -13,7 +13,6 @@ import { FeaturedCarousel } from "@/components/featured-carousel";
 
 // Hand-picked covers where the first photo of a category doesn't show the machine well.
 const coverOverrides: Partial<Record<string, string>> = { palletwagens: "/products/1_43zs9d2l.webp" };
-const whyIcons = [Wrench, Clock, Truck, RotateCcw];
 
 export const revalidate = 60;
 
@@ -165,29 +164,6 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
               </span>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ───────── Why ───────── */}
-      <section className="mx-auto mt-24 max-w-7xl px-4 sm:px-6">
-        <Reveal className="mb-10 text-center">
-          <h2 className="text-3xl font-extrabold sm:text-4xl">{dict.home.whyTitle}</h2>
-        </Reveal>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {dict.home.why.map((w, i) => {
-            const Icon = whyIcons[i];
-            return (
-              <Reveal key={w.title} delay={i * 0.08}>
-                <div className="group bg-surface border-line shadow-card hover:shadow-lift h-full rounded-3xl border p-7 transition hover:-translate-y-1">
-                  <span className="bg-brand-gradient mb-5 grid size-14 place-items-center rounded-2xl text-white shadow-lg transition group-hover:rotate-6 group-hover:scale-110">
-                    <Icon className="size-7" />
-                  </span>
-                  <h3 className="text-lg font-bold">{w.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">{w.text}</p>
-                </div>
-              </Reveal>
-            );
-          })}
         </div>
       </section>
 

@@ -97,25 +97,6 @@ const en: Dict = {
     featuredSubtitle: "Available now — trade-in and transport negotiable.",
     categoriesTitle: "Shop by category",
     categoriesSubtitle: "From compact stackers to powerful forklifts.",
-    whyTitle: "Why De Baat Trading",
-    why: [
-      {
-        title: "Trade-in welcome",
-        text: "Have an old machine to trade in? Trade-in and transport are negotiable on every machine.",
-      },
-      {
-        title: "Fast delivery",
-        text: "In stock and ordered before 4 pm? We deliver within 24 hours or the next working day.",
-      },
-      {
-        title: "Our own transport",
-        text: "We handle transport ourselves. Free pick-up in Nieuwerkerk aan den IJssel is possible too.",
-      },
-      {
-        title: "30-day viewing period",
-        text: "Check within 30 days that your order matches the offer. We cover the return shipping.",
-      },
-    ],
     sellTitle: "Machines to spare? We buy them.",
     sellText:
       "Excavators, forklifts, aerial platforms, pallet trucks, reach trucks, shovels and stackers. You get paid immediately — cash or bank transfer — and we take care of transport.",
@@ -169,6 +150,7 @@ const en: Dict = {
     zoom: "Enlarge",
     share: "Share",
     copied: "Link copied",
+    viewingPeriod: "30-day viewing period",
     shippingNote: "Pick-up is free. Delivery in the Netherlands: € {price} excl. VAT.",
     businessOnly: "For business customers only.",
   },

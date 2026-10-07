@@ -95,25 +95,6 @@ const nl = {
     featuredSubtitle: "Direct beschikbaar — inruil en transport bespreekbaar.",
     categoriesTitle: "Zoek op categorie",
     categoriesSubtitle: "Van compacte stapelaars tot krachtige heftrucks.",
-    whyTitle: "Waarom De Baat Trading",
-    why: [
-      {
-        title: "Inruil bespreekbaar",
-        text: "Een oude machine in te ruilen? Inruil en transport zijn bij elke machine bespreekbaar.",
-      },
-      {
-        title: "Snel geleverd",
-        text: "Op voorraad en besteld voor 16:00 uur? Dan leveren we binnen 24 uur of de eerstvolgende werkdag.",
-      },
-      {
-        title: "Transport in eigen beheer",
-        text: "Wij verzorgen het transport zelf. Gratis ophalen in Nieuwerkerk aan den IJssel kan ook.",
-      },
-      {
-        title: "30 dagen zichttermijn",
-        text: "Controleer binnen 30 dagen of uw bestelling conform het aanbod is. De retourkosten zijn voor ons.",
-      },
-    ],
     sellTitle: "Machines over? Wij kopen ze in.",
     sellText:
       "Graafmachines, heftrucks, hoogwerkers, palletwagens, reachtrucks, shovels en stapelaars. U ontvangt direct betaling — contant of per bank — en wij verzorgen het transport.",
@@ -167,6 +148,7 @@ const nl = {
     zoom: "Vergroten",
     share: "Delen",
     copied: "Link gekopieerd",
+    viewingPeriod: "30 dagen zichttermijn",
     shippingNote: "Ophalen is gratis. Bezorgen in Nederland: € {price} excl. BTW.",
     businessOnly: "Uitsluitend voor zakelijke klanten.",
   },
