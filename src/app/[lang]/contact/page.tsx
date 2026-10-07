@@ -44,7 +44,7 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <PageHero title={d.contact.title} subtitle={d.contact.subtitle} eyebrow={site.name} />
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
-        <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
           <div>
             <h2 className="mb-6 text-3xl font-extrabold">{d.contact.formTitle}</h2>
             <p className="mb-6 rounded-2xl border border-accent/30 bg-accent/10 px-5 py-4 text-sm font-medium">{d.contact.visitNote}</p>

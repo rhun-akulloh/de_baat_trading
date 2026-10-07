@@ -15,7 +15,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dict }) {
         <i className="-top-24 right-0 size-96 bg-accent/60" />
         <i className="bottom-0 -left-20 size-80 bg-brand-2/70" style={{ animationDelay: "-8s" }} />
       </div>
-      <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr_1.3fr]">
+      <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.3fr)]">
         <div>
           <Logo light />
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/70">{dict.footer.tagline}</p>

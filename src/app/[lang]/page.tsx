@@ -28,8 +28,6 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   const featured = [...forSale.filter((p) => p.featured), ...forSale.filter((p) => !p.featured)].slice(0, 6);
   const statValues: Record<string, number> = {
     machines: forSale.length,
-    delivery: 24,
-    viewing: 30,
     categories: categoryIds.length,
   };
 
@@ -84,8 +82,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       </section>
 
       {/* ───────── Stats ───────── */}
-      <section className="relative z-10 mx-auto -mt-10 max-w-6xl px-4 sm:px-6">
-        <Reveal className="bg-surface shadow-lift border-line grid grid-cols-2 gap-px overflow-hidden rounded-3xl border md:grid-cols-4">
+      <section className="relative z-10 mx-auto -mt-10 max-w-2xl px-4 sm:px-6">
+        <Reveal className="bg-surface shadow-lift border-line grid grid-cols-2 gap-px overflow-hidden rounded-3xl border">
           {dict.home.stats.map((s) => (
             <div key={s.key} className="bg-surface px-6 py-7 text-center">
               <p className="text-gradient font-display text-4xl font-extrabold">
@@ -95,7 +93,6 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             </div>
           ))}
         </Reveal>
-        <p className="mt-3 text-center text-xs text-muted">{dict.home.statsNote}</p>
       </section>
 
       {/* ───────── Featured ───────── */}
@@ -173,7 +170,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           <div className="bg-accent-gradient relative isolate overflow-hidden rounded-[2rem] p-8 text-[#1a0d00] sm:p-14">
             <div className="hazard absolute inset-x-0 top-0 h-2.5 opacity-80" />
             <div className="absolute -top-20 -right-20 size-80 rounded-full bg-white/25 blur-3xl" />
-            <div className="relative grid items-center gap-8 lg:grid-cols-[1.4fr_1fr]">
+            <div className="relative grid items-center gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
               <div>
                 <h2 className="text-3xl font-extrabold sm:text-5xl">{dict.home.sellTitle}</h2>
                 <p className="mt-4 max-w-2xl text-lg leading-relaxed text-[#3a1d00]">{dict.home.sellText}</p>

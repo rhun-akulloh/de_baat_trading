@@ -81,6 +81,13 @@
   66% { transform: translate3d(-6%, 8%, 0) scale(0.92); }
 }
 
+/* A bare `grid` gets one column that may shrink below its content (minmax(0,1fr)) instead of `auto`, which
+   lets a wide child — e.g. a row of photo thumbnails — stretch the whole page past the phone screen.
+   Base layer: explicit grid-cols-* utilities still override it. */
+@layer base {
+  .grid { grid-template-columns: minmax(0, 1fr); }
+}
+
 html { scroll-behavior: smooth; }
 
 body {

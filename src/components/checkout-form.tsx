@@ -165,7 +165,7 @@ export function CheckoutForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="relative grid gap-8 lg:grid-cols-[1.6fr_1fr]">
+    <form onSubmit={onSubmit} noValidate className="relative grid gap-8 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
       <Honeypot />
       <div className="space-y-8">
         <section className="bg-surface border-line shadow-card rounded-3xl border p-6 sm:p-8">

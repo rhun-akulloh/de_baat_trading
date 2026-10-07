@@ -70,7 +70,7 @@ export default async function SellPage({ params }: PageProps<"/[lang]/sell">) {
           ))}
         </ol>
 
-        <div className="mt-16 grid gap-10 lg:grid-cols-[1fr_1.4fr]">
+        <div className="mt-16 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">
           <div>
             <h2 className="text-3xl font-extrabold">{d.sell.formTitle}</h2>
             <p className="mt-3 text-muted">{d.sell.formText}</p>

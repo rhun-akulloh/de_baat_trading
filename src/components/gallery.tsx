@@ -47,7 +47,7 @@ export function Gallery({ images, alt }: { images: string[]; alt: string }) {
   const label = fmt(dict.product.gallery, { i: i + 1, n });
 
   return (
-    <div className="space-y-3">
+    <div className="min-w-0 space-y-3">
       <div
         className="group bg-surface-2 border-line shadow-card relative aspect-[4/3] overflow-hidden rounded-3xl border sm:aspect-[5/4]"
         {...swipe}

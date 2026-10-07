@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CheckCircle2, ChevronRight, Mail, Phone, RotateCcw, Truck, Zap } from "lucide-react";
+import { CheckCircle2, ChevronRight, Mail, Phone, Truck, Zap } from "lucide-react";
 import { getDictionary } from "@/dictionaries";
 import { fmt, hasLocale, locales } from "@/lib/i18n";
 import { formatPrice, relatedTo, specRows } from "@/lib/products";
@@ -83,7 +83,7 @@ export default async function ProductPage({ params }: PageProps<"/[lang]/product
         <span className="font-semibold text-ink">{p.title[lang]}</span>
       </nav>
 
-      <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
         <div className="lg:sticky lg:top-24 lg:self-start">
           <Gallery images={p.images} alt={`${p.title[lang]} — ${p.kind[lang]}`} />
         </div>
@@ -117,7 +117,6 @@ export default async function ProductPage({ params }: PageProps<"/[lang]/product
             </div>
             <ul className="mt-6 space-y-2.5 border-t border-line pt-5 text-sm">
               <li className="flex gap-3"><Truck className="mt-0.5 size-5 shrink-0 text-accent" /> {fmt(d.product.shippingNote, { price: site.deliveryPrice })}</li>
-              <li className="flex gap-3"><RotateCcw className="mt-0.5 size-5 shrink-0 text-accent" /> {d.product.viewingPeriod}</li>
               <li className="flex gap-3"><Zap className="mt-0.5 size-5 shrink-0 text-accent" /> {d.common.soldHint}</li>
             </ul>
             <p className="mt-4 text-xs text-muted">{d.product.orderText} {d.product.businessOnly}</p>
